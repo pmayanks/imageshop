@@ -1,1 +1,1 @@
-This content moved to: **https://app-modernization.workshop.aws/en/microservices/dynamo-db.html** 
+DynamoDB for Imageshop
