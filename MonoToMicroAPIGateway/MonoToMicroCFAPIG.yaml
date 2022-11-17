@@ -1,5 +1,5 @@
 AWSTemplateFormatVersion: 2010-09-09
-Description: API-Gateway stack for the Application Modernization Workshop/ Immersion Day
+Description: API-Gateway stack for the images/ Immersion Day
 Parameters:
   imageshopBackendDnsName:
     Type: AWS::SSM::Parameter::Value<String>

@@ -1,5 +1,5 @@
 AWSTemplateFormatVersion: 2010-09-09
-Description: AWS Migration Hub Refactor Spaces foundation stack for the Application Modernization Workshop/ Immersion Day
+Description: AWS Migration Hub Refactor Spaces foundation stack for the images/ Immersion Day
 
 Parameters:
   imageshopVpcId:

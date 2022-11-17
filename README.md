@@ -1,4 +1,4 @@
-# AWS Iterative Application Modernization Workshop
+# AWS Iterative images
 
 ![](/MonoToMicroAssets/assets1024/imageshop_front.png)
 

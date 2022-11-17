@@ -1,5 +1,5 @@
 AWSTemplateFormatVersion: 2010-09-09
-Description: Amazon Lambda Services stack for the Application Modernization Workshop/Immersion Day
+Description: Amazon Lambda Services stack for the images/Immersion Day
 Resources:
   AddUnicornToBasketLambda:
     Type: AWS::Lambda::Function

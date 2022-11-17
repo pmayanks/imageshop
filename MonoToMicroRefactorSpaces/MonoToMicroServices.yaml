@@ -1,5 +1,5 @@
 AWSTemplateFormatVersion: 2010-09-09
-Description: Shopping Cart Services Stack for the Application Modernization Workshop/Immersion Day
+Description: Shopping Cart Services Stack for the images/Immersion Day
 
 Parameters:
   RefactorSpacesEnvironmentId:
