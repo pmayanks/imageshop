@@ -21,12 +21,12 @@ package com.monoToMicro.core.services;
 import org.springframework.stereotype.Service;
 
 
-import com.monoToMicro.core.events.ReadUnicornsBasketEvent;
-import com.monoToMicro.core.events.ReadUnicornsEvent;
-import com.monoToMicro.core.events.UnicornsReadBasketEvent;
-import com.monoToMicro.core.events.UnicornsReadEvent;
-import com.monoToMicro.core.events.UnicornsWriteBasketEvent;
-import com.monoToMicro.core.events.WriteUnicornsBasketEvent;
+import com.monoToMicro.core.events.ReadimagesBasketEvent;
+import com.monoToMicro.core.events.ReadimagesEvent;
+import com.monoToMicro.core.events.imagesReadBasketEvent;
+import com.monoToMicro.core.events.imagesReadEvent;
+import com.monoToMicro.core.events.imagesWriteBasketEvent;
+import com.monoToMicro.core.events.WriteimagesBasketEvent;
 
 /**
  * 
@@ -34,7 +34,7 @@ import com.monoToMicro.core.events.WriteUnicornsBasketEvent;
  * 
  */
 @Service
-public interface UnicornService {
+public interface imageservice {
 
 	
 	/**
@@ -42,33 +42,33 @@ public interface UnicornService {
 	 * @param readItemSetEvent
 	 * @return
 	 */
-	public UnicornsReadEvent getUnicorns(ReadUnicornsEvent readUnicornsEvent);
+	public imagesReadEvent getimages(ReadimagesEvent readimagesEvent);
 
 	/**
 	 * 
-	 * @param writeUnicornsBasketEvent
+	 * @param writeimagesBasketEvent
 	 * @return
 	 */
-	public UnicornsWriteBasketEvent addUnicornToBasket(WriteUnicornsBasketEvent writeUnicornsBasketEvent);
+	public imagesWriteBasketEvent addUnicornToBasket(WriteimagesBasketEvent writeimagesBasketEvent);
 		
 	/**
 	 * 
-	 * @param writeUnicornsBasketEvent
+	 * @param writeimagesBasketEvent
 	 * @return
 	 */
-	public UnicornsWriteBasketEvent removeUnicornFromBasket(WriteUnicornsBasketEvent writeUnicornsBasketEvent);
+	public imagesWriteBasketEvent removeUnicornFromBasket(WriteimagesBasketEvent writeimagesBasketEvent);
 	
 	/**
 	 * 
-	 * @param readUnicornsBasketEvent
+	 * @param readimagesBasketEvent
 	 * @return
 	 */
-	public UnicornsReadBasketEvent getUnicornBasket(ReadUnicornsBasketEvent readUnicornsBasketEvent);
+	public imagesReadBasketEvent getUnicornBasket(ReadimagesBasketEvent readimagesBasketEvent);
 	
 	/**
 	 * 
-	 * @param readUnicornsBasketEvent
+	 * @param readimagesBasketEvent
 	 * @return
 	 */
-	public UnicornsReadBasketEvent getAllBaskets();		
+	public imagesReadBasketEvent getAllBaskets();		
 }

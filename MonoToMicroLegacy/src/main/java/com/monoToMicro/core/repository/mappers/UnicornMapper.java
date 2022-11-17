@@ -34,7 +34,7 @@ public interface UnicornMapper {
 	 * 
 	 * @return
 	 */
-	public List<Unicorn> getUnicorns();
+	public List<Unicorn> getimages();
 	
 	/**
 	 * 

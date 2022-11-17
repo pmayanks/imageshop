@@ -18,14 +18,14 @@
 
 package com.monoToMicro.rest.controller;
 
-import com.monoToMicro.core.events.ReadUnicornsBasketEvent;
+import com.monoToMicro.core.events.ReadimagesBasketEvent;
 
-import com.monoToMicro.core.events.UnicornsReadBasketEvent;
-import com.monoToMicro.core.events.UnicornsWriteBasketEvent;
-import com.monoToMicro.core.events.WriteUnicornsBasketEvent;
+import com.monoToMicro.core.events.imagesReadBasketEvent;
+import com.monoToMicro.core.events.imagesWriteBasketEvent;
+import com.monoToMicro.core.events.WriteimagesBasketEvent;
 import com.monoToMicro.core.model.Unicorn;
 import com.monoToMicro.core.model.UnicornBasket;
-import com.monoToMicro.core.services.UnicornService;
+import com.monoToMicro.core.services.imageservice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -44,11 +44,11 @@ import java.util.List;
  * 
  */
 @RestController
-@RequestMapping("/unicorns/basket")
+@RequestMapping("/images/basket")
 public class BasketController extends CoreController {
 
 	@Autowired
-	private UnicornService unicornService;
+	private imageservice imageservice;
 	
 	/**
 	 *  
@@ -59,16 +59,16 @@ public class BasketController extends CoreController {
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<Void> addUnicornToBasket(@RequestBody UnicornBasket unicornBasket) {
 				
-		if(unicornBasket!=null && unicornBasket.getUnicorns()!=null && !unicornBasket.getUnicorns().isEmpty()) {
+		if(unicornBasket!=null && unicornBasket.getimages()!=null && !unicornBasket.getimages().isEmpty()) {
 			
 			String userUuid = unicornBasket.getUuid();		
 			//Assuming only one Unicorn is added each time
-			String unicornUuid = unicornBasket.getUnicorns().get(0).getUuid();		
+			String unicornUuid = unicornBasket.getimages().get(0).getUuid();		
 			
-			WriteUnicornsBasketEvent writeUnicornsBasketEvent = new WriteUnicornsBasketEvent(userUuid, unicornUuid);
-			UnicornsWriteBasketEvent unicornsWriteBasketEvent = unicornService.addUnicornToBasket(writeUnicornsBasketEvent);
+			WriteimagesBasketEvent writeimagesBasketEvent = new WriteimagesBasketEvent(userUuid, unicornUuid);
+			imagesWriteBasketEvent imagesWriteBasketEvent = imageservice.addUnicornToBasket(writeimagesBasketEvent);
 
-			if (unicornsWriteBasketEvent.isStateSuccess()) {
+			if (imagesWriteBasketEvent.isStateSuccess()) {
 				
 				return new ResponseEntity<Void>(HttpStatus.OK);
 			}
@@ -80,16 +80,16 @@ public class BasketController extends CoreController {
 	@RequestMapping(method = RequestMethod.DELETE)
 	public ResponseEntity<Void> removeFromBasket(@RequestBody UnicornBasket unicornBasket) {
 				
-		if(unicornBasket!=null && unicornBasket.getUnicorns()!=null && !unicornBasket.getUnicorns().isEmpty()) {
+		if(unicornBasket!=null && unicornBasket.getimages()!=null && !unicornBasket.getimages().isEmpty()) {
 			
 			String userUuid = unicornBasket.getUuid();		
 			//Assuming only one Unicorn is added each time
-			String unicornUuid = unicornBasket.getUnicorns().get(0).getUuid();
+			String unicornUuid = unicornBasket.getimages().get(0).getUuid();
 		
-			WriteUnicornsBasketEvent writeUnicornsBasketEvent = new WriteUnicornsBasketEvent(userUuid, unicornUuid);
-			UnicornsWriteBasketEvent unicornsWriteBasketEvent = unicornService.removeUnicornFromBasket(writeUnicornsBasketEvent);
+			WriteimagesBasketEvent writeimagesBasketEvent = new WriteimagesBasketEvent(userUuid, unicornUuid);
+			imagesWriteBasketEvent imagesWriteBasketEvent = imageservice.removeUnicornFromBasket(writeimagesBasketEvent);
 
-			if (unicornsWriteBasketEvent.isStateSuccess()) {			
+			if (imagesWriteBasketEvent.isStateSuccess()) {			
 				return new ResponseEntity<Void>(HttpStatus.OK);
 			}
 		}
@@ -100,14 +100,14 @@ public class BasketController extends CoreController {
 	@RequestMapping(method = RequestMethod.GET, value = "/{userUuid}")
 	public ResponseEntity<UnicornBasket> getUnicornBasket(@PathVariable String userUuid) {
 				
-		ReadUnicornsBasketEvent readUnicornsBasketEvent = new ReadUnicornsBasketEvent(userUuid);
-		UnicornsReadBasketEvent unicornsReadBasketEvent = unicornService.getUnicornBasket(readUnicornsBasketEvent);
+		ReadimagesBasketEvent readimagesBasketEvent = new ReadimagesBasketEvent(userUuid);
+		imagesReadBasketEvent imagesReadBasketEvent = imageservice.getUnicornBasket(readimagesBasketEvent);
 
-		if (unicornsReadBasketEvent.isReadOK()) {
-			List<Unicorn> unicorns = unicornsReadBasketEvent.getUnicorns();
+		if (imagesReadBasketEvent.isReadOK()) {
+			List<Unicorn> images = imagesReadBasketEvent.getimages();
 			UnicornBasket unicornBasket = new UnicornBasket();
 			unicornBasket.setUuid(userUuid);
-			unicornBasket.setUnicorns(unicorns);
+			unicornBasket.setimages(images);
 			return new ResponseEntity<UnicornBasket>(unicornBasket, HttpStatus.OK);			
 		}
 

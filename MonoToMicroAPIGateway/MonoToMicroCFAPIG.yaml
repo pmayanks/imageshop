@@ -1,32 +1,32 @@
 AWSTemplateFormatVersion: 2010-09-09
 Description: API-Gateway stack for the Application Modernization Workshop/ Immersion Day
 Parameters:
-  UniShopBackendDnsName:
+  imageshopBackendDnsName:
     Type: AWS::SSM::Parameter::Value<String>
-    Default: UniShopPublicDnsName
+    Default: imageshopPublicDnsName
 
 Resources:
   ApiGatewayRestApi:
     Type: AWS::ApiGateway::RestApi
     Properties:
-      Name: unicorns
+      Name: images
       EndpointConfiguration:
         Types:
           - EDGE
 
-  UnicornsResource:
+  imagesResource:
     Type: AWS::ApiGateway::Resource
     Properties:
       ParentId: !GetAtt ApiGatewayRestApi.RootResourceId
-      PathPart: unicorns
+      PathPart: images
       RestApiId: !Ref ApiGatewayRestApi
 
-  # Enable Api Gateway CORS for Unicorns Resource
-  EnableApiGatewayCORS4UnicornsResourceMethod:
+  # Enable Api Gateway CORS for images Resource
+  EnableApiGatewayCORS4imagesResourceMethod:
     Type: AWS::ApiGateway::Method
     Properties:
       AuthorizationType: NONE
-      ResourceId: !Ref UnicornsResource
+      ResourceId: !Ref imagesResource
       RestApiId: !Ref ApiGatewayRestApi
       HttpMethod: OPTIONS
       Integration:
@@ -52,11 +52,11 @@ Resources:
             method.response.header.Access-Control-Allow-Methods: false
             method.response.header.Access-Control-Allow-Origin: false
 
-  UnicornsGetMethod:
+  imagesGetMethod:
     Type: AWS::ApiGateway::Method
     Properties:
       HttpMethod: GET
-      ResourceId: !Ref UnicornsResource
+      ResourceId: !Ref imagesResource
       RestApiId: !Ref ApiGatewayRestApi
       AuthorizationType: NONE
       MethodResponses:
@@ -71,7 +71,7 @@ Resources:
       Integration:
         IntegrationHttpMethod: GET
         Type: HTTP
-        Uri: !Join [ "", [ !Ref UniShopBackendDnsName, '/unicorns' ] ]
+        Uri: !Join [ "", [ !Ref imageshopBackendDnsName, '/images' ] ]
         IntegrationResponses:
           - StatusCode: 200
             ResponseParameters:
@@ -85,7 +85,7 @@ Resources:
   BasketResource:
     Type: AWS::ApiGateway::Resource
     Properties:
-      ParentId: !Ref UnicornsResource
+      ParentId: !Ref imagesResource
       PathPart: basket
       RestApiId: !Ref ApiGatewayRestApi
 
@@ -139,7 +139,7 @@ Resources:
       Integration:
         IntegrationHttpMethod: POST
         Type: HTTP
-        Uri: !Join [ "", [ !Ref UniShopBackendDnsName, '/unicorns/basket' ] ]
+        Uri: !Join [ "", [ !Ref imageshopBackendDnsName, '/images/basket' ] ]
         IntegrationResponses:
           - StatusCode: 200
             ResponseParameters:
@@ -169,7 +169,7 @@ Resources:
       Integration:
         IntegrationHttpMethod: DELETE
         Type: HTTP
-        Uri: !Join [ "", [ !Ref UniShopBackendDnsName, '/unicorns/basket' ] ]
+        Uri: !Join [ "", [ !Ref imageshopBackendDnsName, '/images/basket' ] ]
         IntegrationResponses:
           - StatusCode: 200
             ResponseParameters:
@@ -239,7 +239,7 @@ Resources:
       Integration:
         IntegrationHttpMethod: GET
         Type: HTTP
-        Uri: !Join [ "", [ !Ref UniShopBackendDnsName, '/unicorns/basket/{uuid}' ] ]
+        Uri: !Join [ "", [ !Ref imageshopBackendDnsName, '/images/basket/{uuid}' ] ]
         RequestParameters:
           integration.request.path.uuid: 'method.request.path.uuid'
         IntegrationResponses:
@@ -309,7 +309,7 @@ Resources:
       Integration:
         IntegrationHttpMethod: POST
         Type: HTTP
-        Uri: !Join [ "", [ !Ref UniShopBackendDnsName, '/user' ] ]
+        Uri: !Join [ "", [ !Ref imageshopBackendDnsName, '/user' ] ]
         IntegrationResponses:
           - StatusCode: 200
             ResponseParameters:
@@ -377,7 +377,7 @@ Resources:
       Integration:
         IntegrationHttpMethod: POST
         Type: HTTP
-        Uri: !Join [ "", [ !Ref UniShopBackendDnsName, '/user/login' ] ]
+        Uri: !Join [ "", [ !Ref imageshopBackendDnsName, '/user/login' ] ]
         IntegrationResponses:
           - StatusCode: 200
             ResponseParameters:
@@ -393,7 +393,7 @@ Resources:
     Properties:
       RestApiId: !Ref ApiGatewayRestApi
     DependsOn:
-      - UnicornsGetMethod
+      - imagesGetMethod
       - BasketPostMethod
       - BasketDeleteMethod
       - UUIDGetMethod

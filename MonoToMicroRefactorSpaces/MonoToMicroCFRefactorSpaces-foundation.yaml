@@ -2,76 +2,76 @@ AWSTemplateFormatVersion: 2010-09-09
 Description: AWS Migration Hub Refactor Spaces foundation stack for the Application Modernization Workshop/ Immersion Day
 
 Parameters:
-  UniShopVpcId:
+  imageshopVpcId:
     Type: AWS::SSM::Parameter::Value<String>
-    Default: UniShopVpcId
+    Default: imageshopVpcId
 
-  UniShopBackendDnsName:
+  imageshopBackendDnsName:
     Type: AWS::SSM::Parameter::Value<String>
-    Default: UniShopPublicDnsName
+    Default: imageshopPublicDnsName
 
 Resources:
-  UniShopRefactorSpacesModernizationEnvironment:
+  imageshopRefactorSpacesModernizationEnvironment:
     Type: AWS::RefactorSpaces::Environment
     Properties:
       Name: unistore-dev
       NetworkFabricType: TRANSIT_GATEWAY
       Description: A Refactor Spaces environment for the Unicorn store
 
-  UniShopRefactorSpacesApplication:
+  imageshopRefactorSpacesApplication:
     Type: AWS::RefactorSpaces::Application
     Properties:
       Name: unistore
-      EnvironmentIdentifier: !Ref UniShopRefactorSpacesModernizationEnvironment
-      VpcId: !Ref UniShopVpcId
+      EnvironmentIdentifier: !Ref imageshopRefactorSpacesModernizationEnvironment
+      VpcId: !Ref imageshopVpcId
       ProxyType: API_GATEWAY
       ApiGatewayProxy:
         EndpointType: REGIONAL
       
-  UniShopLegacyService:
+  imageshopLegacyService:
     Type: AWS::RefactorSpaces::Service
     Properties:
       Name: legacy
-      EnvironmentIdentifier: !Ref UniShopRefactorSpacesModernizationEnvironment
-      ApplicationIdentifier: !GetAtt UniShopRefactorSpacesApplication.ApplicationIdentifier
+      EnvironmentIdentifier: !Ref imageshopRefactorSpacesModernizationEnvironment
+      ApplicationIdentifier: !GetAtt imageshopRefactorSpacesApplication.ApplicationIdentifier
       EndpointType: URL
-      VpcId: !Ref UniShopVpcId
+      VpcId: !Ref imageshopVpcId
       UrlEndpoint:
-        Url: !Ref UniShopBackendDnsName
-        HealthUrl: !Join [ "", [ !Ref UniShopBackendDnsName, '/actuator/health' ] ]
+        Url: !Ref imageshopBackendDnsName
+        HealthUrl: !Join [ "", [ !Ref imageshopBackendDnsName, '/actuator/health' ] ]
 
-  UniShopDefaultRoute:
+  imageshopDefaultRoute:
     Type: AWS::RefactorSpaces::Route
     Properties:
       RouteType: DEFAULT
-      ServiceIdentifier: !GetAtt UniShopLegacyService.ServiceIdentifier
-      EnvironmentIdentifier: !Ref UniShopRefactorSpacesModernizationEnvironment
-      ApplicationIdentifier: !GetAtt UniShopRefactorSpacesApplication.ApplicationIdentifier
+      ServiceIdentifier: !GetAtt imageshopLegacyService.ServiceIdentifier
+      EnvironmentIdentifier: !Ref imageshopRefactorSpacesModernizationEnvironment
+      ApplicationIdentifier: !GetAtt imageshopRefactorSpacesApplication.ApplicationIdentifier
 
-  UniShopEnvironmentIdSSM:
+  imageshopEnvironmentIdSSM:
     Type: AWS::SSM::Parameter
     Properties:
-      Name: UniShopEnvironmentId
-      Value: !GetAtt UniShopRefactorSpacesModernizationEnvironment.EnvironmentIdentifier
+      Name: imageshopEnvironmentId
+      Value: !GetAtt imageshopRefactorSpacesModernizationEnvironment.EnvironmentIdentifier
       Type: String
-      Description: UniShop Application Id
+      Description: imageshop Application Id
 
-  UniShopApplicationIdSSM:
+  imageshopApplicationIdSSM:
     Type: AWS::SSM::Parameter
     Properties:
-      Name: UniShopApplicationId
-      Value: !GetAtt UniShopRefactorSpacesApplication.ApplicationIdentifier
+      Name: imageshopApplicationId
+      Value: !GetAtt imageshopRefactorSpacesApplication.ApplicationIdentifier
       Type: String
-      Description: UniShop Environment Id
+      Description: imageshop Environment Id
 
-  UniShopApiGatewayIdSSM:
+  imageshopApiGatewayIdSSM:
     Type: AWS::SSM::Parameter
     Properties:
-      Name: UniShopApiGatewayId
-      Value: !GetAtt UniShopRefactorSpacesApplication.ApiGatewayId
+      Name: imageshopApiGatewayId
+      Value: !GetAtt imageshopRefactorSpacesApplication.ApiGatewayId
       Type: String
-      Description: UniShop API Gateway Id
+      Description: imageshop API Gateway Id
 
 Outputs:
-  UniShopApiGatewayProxyUrl:
-    Value: !GetAtt UniShopRefactorSpacesApplication.ProxyUrl
+  imageshopApiGatewayProxyUrl:
+    Value: !GetAtt imageshopRefactorSpacesApplication.ProxyUrl

@@ -18,9 +18,9 @@
 
 package com.monoToMicro.rest.controller;
 
-import com.monoToMicro.core.events.UnicornsReadBasketEvent;
+import com.monoToMicro.core.events.imagesReadBasketEvent;
 import com.monoToMicro.core.model.UnicornBasket;
-import com.monoToMicro.core.services.UnicornService;
+import com.monoToMicro.core.services.imageservice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -41,16 +41,16 @@ import java.util.List;
 public class DataReplicationController extends CoreController {
 
 	@Autowired
-	private UnicornService unicornService;
+	private imageservice imageservice;
 
 	@PreAuthorize("permitAll()")
 	@RequestMapping(method = RequestMethod.GET)
 	public ResponseEntity<Void> replicate() {
 				
-		UnicornsReadBasketEvent unicornsReadEvent = unicornService.getAllBaskets();
+		imagesReadBasketEvent imagesReadEvent = imageservice.getAllBaskets();
 
-		if (unicornsReadEvent.isReadOK()) {
-			List<UnicornBasket> baskets = unicornsReadEvent.getBaskets();
+		if (imagesReadEvent.isReadOK()) {
+			List<UnicornBasket> baskets = imagesReadEvent.getBaskets();
 			return new ResponseEntity(HttpStatus.OK);
 		}
 		return null;

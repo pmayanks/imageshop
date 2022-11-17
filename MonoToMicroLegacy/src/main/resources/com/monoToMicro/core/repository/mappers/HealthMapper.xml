@@ -4,6 +4,6 @@
 
 <mapper namespace="com.monoToMicro.core.repository.mappers.HealthMapper">
 	<select id="isDatabaseReachable" resultType="int">
-		select count(*) from unicorns				 	
+		select count(*) from images				 	
 	</select>	
 </mapper>

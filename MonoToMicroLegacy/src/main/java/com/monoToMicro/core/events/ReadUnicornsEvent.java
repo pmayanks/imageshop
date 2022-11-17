@@ -23,9 +23,9 @@ package com.monoToMicro.core.events;
  * @author nirozeri
  * 
  */
-public class ReadUnicornsEvent extends ReadEvent {
+public class ReadimagesEvent extends ReadEvent {
 	
-	public ReadUnicornsEvent() {
+	public ReadimagesEvent() {
 		
 	}
 }

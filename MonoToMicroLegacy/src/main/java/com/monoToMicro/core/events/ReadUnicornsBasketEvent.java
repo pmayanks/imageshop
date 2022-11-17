@@ -23,11 +23,11 @@ package com.monoToMicro.core.events;
  * @author nirozeri
  * 
  */
-public class ReadUnicornsBasketEvent extends ReadEvent {
+public class ReadimagesBasketEvent extends ReadEvent {
 	
 	private String userUUID = null;
 	
-	public ReadUnicornsBasketEvent(String userUUID) {		
+	public ReadimagesBasketEvent(String userUUID) {		
 		this.setUserUUID(userUUID);		
 	}
 

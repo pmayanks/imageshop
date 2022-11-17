@@ -36,7 +36,7 @@ public interface UnicornRepository {
 	 * 
 	 * @return
 	 */
-	public List<Unicorn> getUnicorns();
+	public List<Unicorn> getimages();
 	
 	/**
 	 * 

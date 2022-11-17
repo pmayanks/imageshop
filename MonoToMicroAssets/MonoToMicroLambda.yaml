@@ -27,11 +27,11 @@ Resources:
         S3Key: MonoToMicroLambda-0.0.1.jar
       Role: !Sub 'arn:aws:iam::${AWS::AccountId}:role/service-role/MonoToMicroLambdaRole'
       Handler: com.monoToMicro.Lambda.UnicornBasketImpl::removeUnicornFromBasket
-  GetUnicornsBasketLambda:
+  GetimagesBasketLambda:
     Type: AWS::Lambda::Function
     Properties:
-      FunctionName: GetUnicornsBasket
-      Description: Lambda that lists the unicorns in a basket.
+      FunctionName: GetimagesBasket
+      Description: Lambda that lists the images in a basket.
       Runtime: java11
       MemorySize: 1024
       Timeout: 30
@@ -39,4 +39,4 @@ Resources:
         S3Bucket: '{{resolve:ssm:LambdaAssetBucketName:1}}'
         S3Key: MonoToMicroLambda-0.0.1.jar
       Role: !Sub 'arn:aws:iam::${AWS::AccountId}:role/service-role/MonoToMicroLambdaRole'
-      Handler: com.monoToMicro.Lambda.UnicornBasketImpl::getUnicornsBasket
+      Handler: com.monoToMicro.Lambda.UnicornBasketImpl::getimagesBasket

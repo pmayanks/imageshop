@@ -28,7 +28,7 @@ import java.util.List;
 public class UnicornBasket {
 	
 	private String uuid = null;		
-	private List<Unicorn> unicorns = null;
+	private List<Unicorn> images = null;
 	
 	
 	/**
@@ -65,15 +65,15 @@ public class UnicornBasket {
 	 * 
 	 * @return
 	 */
-	public List<Unicorn> getUnicorns() {
-		return unicorns;
+	public List<Unicorn> getimages() {
+		return images;
 	}
 
 	/**
 	 * 
-	 * @param unicorns
+	 * @param images
 	 */
-	public void setUnicorns(List<Unicorn> unicorns) {
-		this.unicorns = unicorns;
+	public void setimages(List<Unicorn> images) {
+		this.images = images;
 	}
 }

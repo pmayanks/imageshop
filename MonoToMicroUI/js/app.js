@@ -28,7 +28,7 @@ var myApp = angular.module('unicorn_app', ['ngRoute', 'ngResource']).controller(
         console.log($scope.host);
         $.ajax({
             type: "GET",
-            url: $scope.host + "/unicorns/",
+            url: $scope.host + "/images/",
             contentType: 'application/json',
             dataType: 'json',
             success: function(response) {
@@ -143,7 +143,7 @@ var myApp = angular.module('unicorn_app', ['ngRoute', 'ngResource']).controller(
         return $scope.colors[index];
     };
 
-    // $.get( "http://ec2-107-20-22-63.compute-1.amazonaws.com/unicorns/", function( data ) {
+    // $.get( "http://ec2-107-20-22-63.compute-1.amazonaws.com/images/", function( data ) {
     //     console.log(data);
     //   });
 
@@ -258,7 +258,7 @@ var myApp = angular.module('unicorn_app', ['ngRoute', 'ngResource']).controller(
 
         console.log(JSON.stringify({
             "uuid": cuuid,
-            "unicorns": [{
+            "images": [{
                 "uuid": puuid
             }]
         }));
@@ -268,12 +268,12 @@ var myApp = angular.module('unicorn_app', ['ngRoute', 'ngResource']).controller(
             var cuuid = $scope.user;
             $.ajax({
                 type: "POST",
-                url: $scope.host + "/unicorns/basket",
+                url: $scope.host + "/images/basket",
                 contentType: "application/json",
                 // dataType: 'json',
                 data: JSON.stringify({
                     "uuid": cuuid,
-                    "unicorns": [{
+                    "images": [{
                         "uuid": puuid
                     }]
                 }),
@@ -322,7 +322,7 @@ var myApp = angular.module('unicorn_app', ['ngRoute', 'ngResource']).controller(
         }
         $.ajax({
             type: "GET",
-            url: $scope.host + "/unicorns/basket/" + $scope.user,
+            url: $scope.host + "/images/basket/" + $scope.user,
             success: function(response) {
 
                 $scope.$apply(function() {
@@ -330,8 +330,8 @@ var myApp = angular.module('unicorn_app', ['ngRoute', 'ngResource']).controller(
                     $scope.cart_prods = [];
 
                     if (response != null) {
-                        for (var i in response.unicorns) {
-                            $scope.cart_prods.push($scope.prods_key[response.unicorns[i].uuid]);
+                        for (var i in response.images) {
+                            $scope.cart_prods.push($scope.prods_key[response.images[i].uuid]);
                         }
                     }
 
@@ -340,7 +340,7 @@ var myApp = angular.module('unicorn_app', ['ngRoute', 'ngResource']).controller(
                     $scope.cart_prods_length = $scope.cart_prods.length;
 
                 });
-                console.log(response.unicorns, "Got the cart"); // server response
+                console.log(response.images, "Got the cart"); // server response
             },
             error: function(err) {
                 console.log(err, "Error");
@@ -358,12 +358,12 @@ var myApp = angular.module('unicorn_app', ['ngRoute', 'ngResource']).controller(
         var cuuid = $scope.user;
         $.ajax({
             type: "DELETE",
-            url: $scope.host + "/unicorns/basket",
+            url: $scope.host + "/images/basket",
             contentType: "application/json",
             // dataType: 'json',
             data: JSON.stringify({
                 "uuid": cuuid,
-                "unicorns": [{
+                "images": [{
                     "uuid": puuid
                 }]
             }),

@@ -16,9 +16,9 @@
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-CREATE SCHEMA `unishop` DEFAULT CHARACTER SET UTF8MB4 ;
+CREATE SCHEMA `imageshop` DEFAULT CHARACTER SET UTF8MB4 ;
 
-CREATE TABLE  `unishop`.`unicorns` (
+CREATE TABLE  `imageshop`.`images` (
 -- general fields 
   	`id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   	`creation_date` timestamp DEFAULT CURRENT_TIMESTAMP,
@@ -36,7 +36,7 @@ CREATE TABLE  `unishop`.`unicorns` (
   	PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=UTF8MB4;
 
-CREATE TABLE  `unishop`.`unicorns_basket` (
+CREATE TABLE  `imageshop`.`images_basket` (
 -- general fields 
   	`id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   	`creation_date` timestamp DEFAULT CURRENT_TIMESTAMP,
@@ -51,7 +51,7 @@ CREATE TABLE  `unishop`.`unicorns_basket` (
   	PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=UTF8MB4;
 
-CREATE TABLE  `unishop`.`unicorn_user` (
+CREATE TABLE  `imageshop`.`unicorn_user` (
 -- general fields 
   	`id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   	`creation_date` timestamp DEFAULT CURRENT_TIMESTAMP,
@@ -68,13 +68,13 @@ CREATE TABLE  `unishop`.`unicorn_user` (
   	PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=UTF8MB4;
 
-INSERT INTO `unishop`.`unicorns` (uuid, name, description, price, image) VALUES (UUID(),'cheetah', 'Nambia Cheetah', 100, 'cheetah');
-INSERT INTO `unishop`.`unicorns` (uuid, name, description, price, image) VALUES (UUID(),'dolphin', 'Jumping Dolphin', 100, 'dolphin');
-INSERT INTO `unishop`.`unicorns` (uuid, name, description, price, image) VALUES (UUID(),'elephant', 'Elephent Gazelle WildLife Zebra !', 100, 'elephant');
-INSERT INTO `unishop`.`unicorns` (uuid, name, description, price, image) VALUES (UUID(),'koala', 'Koala Bear', 100, 'koala');
-INSERT INTO `unishop`.`unicorns` (uuid, name, description, price, image) VALUES (UUID(),'owl', 'Nature Bird Owl', 100, 'owl');
-INSERT INTO `unishop`.`unicorns` (uuid, name, description, price, image) VALUES (UUID(),'penguin', 'Baby Penguin Antartic Life', 100, 'penguin');
-INSERT INTO `unishop`.`unicorns` (uuid, name, description, price, image) VALUES (UUID(),'tiger', 'Wild Life Animal Tiger', 100, 'tiger');
-INSERT INTO `unishop`.`unicorns` (uuid, name, description, price, image) VALUES (UUID(),'turtle', 'Superfun Bestselling Unicorn Hooded Blanket', 100, 'turtle');
-INSERT INTO `unishop`.`unicorns` (uuid, name, description, price, image) VALUES (UUID(),'whalehump', 'Whale Back Hump', 100, 'whalehump');
-INSERT INTO `unishop`.`unicorns` (uuid, name, description, price, image) VALUES (UUID(),'wolf', 'Wolf The Predator', 100, 'wolf');
+INSERT INTO `imageshop`.`images` (uuid, name, description, price, image) VALUES (UUID(),'cheetah', 'Nambia Cheetah', 100, 'cheetah');
+INSERT INTO `imageshop`.`images` (uuid, name, description, price, image) VALUES (UUID(),'dolphin', 'Jumping Dolphin', 100, 'dolphin');
+INSERT INTO `imageshop`.`images` (uuid, name, description, price, image) VALUES (UUID(),'elephant', 'Elephent Gazelle WildLife Zebra !', 100, 'elephant');
+INSERT INTO `imageshop`.`images` (uuid, name, description, price, image) VALUES (UUID(),'koala', 'Koala Bear', 100, 'koala');
+INSERT INTO `imageshop`.`images` (uuid, name, description, price, image) VALUES (UUID(),'owl', 'Nature Bird Owl', 100, 'owl');
+INSERT INTO `imageshop`.`images` (uuid, name, description, price, image) VALUES (UUID(),'penguin', 'Baby Penguin Antartic Life', 100, 'penguin');
+INSERT INTO `imageshop`.`images` (uuid, name, description, price, image) VALUES (UUID(),'tiger', 'Wild Life Animal Tiger', 100, 'tiger');
+INSERT INTO `imageshop`.`images` (uuid, name, description, price, image) VALUES (UUID(),'turtle', 'Superfun Bestselling Unicorn Hooded Blanket', 100, 'turtle');
+INSERT INTO `imageshop`.`images` (uuid, name, description, price, image) VALUES (UUID(),'whalehump', 'Whale Back Hump', 100, 'whalehump');
+INSERT INTO `imageshop`.`images` (uuid, name, description, price, image) VALUES (UUID(),'wolf', 'Wolf The Predator', 100, 'wolf');

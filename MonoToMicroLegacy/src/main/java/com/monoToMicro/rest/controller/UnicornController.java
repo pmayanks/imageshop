@@ -18,10 +18,10 @@
 
 package com.monoToMicro.rest.controller;
 
-import com.monoToMicro.core.events.ReadUnicornsEvent;
-import com.monoToMicro.core.events.UnicornsReadEvent;
+import com.monoToMicro.core.events.ReadimagesEvent;
+import com.monoToMicro.core.events.imagesReadEvent;
 import com.monoToMicro.core.model.Unicorn;
-import com.monoToMicro.core.services.UnicornService;
+import com.monoToMicro.core.services.imageservice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -38,22 +38,22 @@ import java.util.Collection;
  * 
  */
 @RestController
-@RequestMapping("/unicorns")
+@RequestMapping("/images")
 public class UnicornController extends CoreController {
 
 	@Autowired
-	private UnicornService unicornService;
+	private imageservice imageservice;
 
 	@PreAuthorize("permitAll()")
 	@RequestMapping(method = RequestMethod.GET)
-	public ResponseEntity<Collection<Unicorn>> getUnicorns() {
+	public ResponseEntity<Collection<Unicorn>> getimages() {
 				
-		ReadUnicornsEvent readUnicornsEvent = new ReadUnicornsEvent();
-		UnicornsReadEvent unicornsReadEvent = unicornService.getUnicorns(readUnicornsEvent);
+		ReadimagesEvent readimagesEvent = new ReadimagesEvent();
+		imagesReadEvent imagesReadEvent = imageservice.getimages(readimagesEvent);
 
-		if (unicornsReadEvent.isReadOK()) {
-			Collection<Unicorn> unicorns = unicornsReadEvent.getUnicorns();
-			return new ResponseEntity<Collection<Unicorn>>(unicorns, HttpStatus.OK);
+		if (imagesReadEvent.isReadOK()) {
+			Collection<Unicorn> images = imagesReadEvent.getimages();
+			return new ResponseEntity<Collection<Unicorn>>(images, HttpStatus.OK);
 		}
 
 		return new ResponseEntity<Collection<Unicorn>>(HttpStatus.BAD_REQUEST);				

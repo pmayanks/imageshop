@@ -26,7 +26,7 @@ import java.util.List;
 @DynamoDbBean
 public class UnicornBasket {
   private String uuid = null;
-  private List<Unicorn> unicorns = null;
+  private List<Unicorn> images = null;
 
   public UnicornBasket() {
   }
@@ -44,12 +44,12 @@ public class UnicornBasket {
     this.uuid = uuid;
   }
 
-  @DynamoDbAttribute(value = "unicorns")
-  public List<Unicorn> getUnicorns() {
-    return unicorns;
+  @DynamoDbAttribute(value = "images")
+  public List<Unicorn> getimages() {
+    return images;
   }
 
-  public void setUnicorns(List<Unicorn> unicorns) {
-    this.unicorns = unicorns;
+  public void setimages(List<Unicorn> images) {
+    this.images = images;
   }
 }

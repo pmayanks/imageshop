@@ -4,15 +4,15 @@ Description: Shopping Cart Services Stack for the Application Modernization Work
 Parameters:
   RefactorSpacesEnvironmentId:
       Type: String
-      Description: UniShop Environment ID. Leave empty to use the value from infrastructure CFN deployment.
+      Description: imageshop Environment ID. Leave empty to use the value from infrastructure CFN deployment.
       Default: ''
   RefactorSpacesApplicationId:
       Type: String
-      Description: UniShop Application ID. Leave empty to use the value from infrastructure CFN deployment.
+      Description: imageshop Application ID. Leave empty to use the value from infrastructure CFN deployment.
       Default: ''
   RefactorSpacesApiGatewayId:
       Type: String
-      Description: UniShop Application API Gateway ID. Leave empty to use the value from infrastructure CFN deployment.
+      Description: imageshop Application API Gateway ID. Leave empty to use the value from infrastructure CFN deployment.
       Default: ''
 
 Conditions:
@@ -27,8 +27,8 @@ Resources:
     Properties:
       Name: AddToCartService
       Description: Add Unicorn to Cart
-      EnvironmentIdentifier: !If [ UseSSMEnvironmentIdValue, '{{resolve:ssm:UniShopEnvironmentId:1}}', !Ref  RefactorSpacesEnvironmentId]
-      ApplicationIdentifier: !If [ UseSSMApplicationIdValue, '{{resolve:ssm:UniShopApplicationId:1}}', !Ref  RefactorSpacesApplicationId]
+      EnvironmentIdentifier: !If [ UseSSMEnvironmentIdValue, '{{resolve:ssm:imageshopEnvironmentId:1}}', !Ref  RefactorSpacesEnvironmentId]
+      ApplicationIdentifier: !If [ UseSSMApplicationIdValue, '{{resolve:ssm:imageshopApplicationId:1}}', !Ref  RefactorSpacesApplicationId]
       EndpointType: LAMBDA
       LambdaEndpoint:
         Arn: !Sub 'arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:AddUnicornToBasket'
@@ -36,11 +36,11 @@ Resources:
     Type: AWS::RefactorSpaces::Route
     Properties:
       RouteType: URI_PATH
-      EnvironmentIdentifier: !If [ UseSSMEnvironmentIdValue, '{{resolve:ssm:UniShopEnvironmentId:1}}', !Ref  RefactorSpacesEnvironmentId]
-      ApplicationIdentifier: !If [ UseSSMApplicationIdValue, '{{resolve:ssm:UniShopApplicationId:1}}', !Ref  RefactorSpacesApplicationId]
+      EnvironmentIdentifier: !If [ UseSSMEnvironmentIdValue, '{{resolve:ssm:imageshopEnvironmentId:1}}', !Ref  RefactorSpacesEnvironmentId]
+      ApplicationIdentifier: !If [ UseSSMApplicationIdValue, '{{resolve:ssm:imageshopApplicationId:1}}', !Ref  RefactorSpacesApplicationId]
       ServiceIdentifier: !GetAtt AddToCartService.ServiceIdentifier
       UriPathRoute:
-        SourcePath: /unicorns/basket
+        SourcePath: /images/basket
         IncludeChildPaths: false
         ActivationState: ACTIVE
         Methods:
@@ -52,8 +52,8 @@ Resources:
     Properties:
       Name: RemoveCartService
       Description: Remove Unicorn From Cart
-      EnvironmentIdentifier: !If [ UseSSMEnvironmentIdValue, '{{resolve:ssm:UniShopEnvironmentId:1}}', !Ref  RefactorSpacesEnvironmentId]
-      ApplicationIdentifier: !If [ UseSSMApplicationIdValue, '{{resolve:ssm:UniShopApplicationId:1}}', !Ref  RefactorSpacesApplicationId]
+      EnvironmentIdentifier: !If [ UseSSMEnvironmentIdValue, '{{resolve:ssm:imageshopEnvironmentId:1}}', !Ref  RefactorSpacesEnvironmentId]
+      ApplicationIdentifier: !If [ UseSSMApplicationIdValue, '{{resolve:ssm:imageshopApplicationId:1}}', !Ref  RefactorSpacesApplicationId]
       EndpointType: LAMBDA
       LambdaEndpoint:
         Arn: !Sub 'arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:RemoveUnicornFromBasket'
@@ -61,11 +61,11 @@ Resources:
     Type: AWS::RefactorSpaces::Route
     Properties:
       RouteType: URI_PATH
-      EnvironmentIdentifier: !If [ UseSSMEnvironmentIdValue, '{{resolve:ssm:UniShopEnvironmentId:1}}', !Ref  RefactorSpacesEnvironmentId]
-      ApplicationIdentifier: !If [ UseSSMApplicationIdValue, '{{resolve:ssm:UniShopApplicationId:1}}', !Ref  RefactorSpacesApplicationId]
+      EnvironmentIdentifier: !If [ UseSSMEnvironmentIdValue, '{{resolve:ssm:imageshopEnvironmentId:1}}', !Ref  RefactorSpacesEnvironmentId]
+      ApplicationIdentifier: !If [ UseSSMApplicationIdValue, '{{resolve:ssm:imageshopApplicationId:1}}', !Ref  RefactorSpacesApplicationId]
       ServiceIdentifier: !GetAtt RemoveCartService.ServiceIdentifier
       UriPathRoute:
-        SourcePath: /unicorns/basket
+        SourcePath: /images/basket
         IncludeChildPaths: false
         ActivationState: ACTIVE
         Methods:
@@ -77,20 +77,20 @@ Resources:
     Properties:
       Name: GetCartService
       Description: Get Cart Contents
-      EnvironmentIdentifier: !If [ UseSSMEnvironmentIdValue, '{{resolve:ssm:UniShopEnvironmentId:1}}', !Ref  RefactorSpacesEnvironmentId]
-      ApplicationIdentifier: !If [ UseSSMApplicationIdValue, '{{resolve:ssm:UniShopApplicationId:1}}', !Ref  RefactorSpacesApplicationId]
+      EnvironmentIdentifier: !If [ UseSSMEnvironmentIdValue, '{{resolve:ssm:imageshopEnvironmentId:1}}', !Ref  RefactorSpacesEnvironmentId]
+      ApplicationIdentifier: !If [ UseSSMApplicationIdValue, '{{resolve:ssm:imageshopApplicationId:1}}', !Ref  RefactorSpacesApplicationId]
       EndpointType: LAMBDA
       LambdaEndpoint:
-        Arn: !Sub 'arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:GetUnicornsBasket'
+        Arn: !Sub 'arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:GetimagesBasket'
   GetCartServiceRoute:
     Type: AWS::RefactorSpaces::Route
     Properties:
       RouteType: URI_PATH
-      EnvironmentIdentifier: !If [ UseSSMEnvironmentIdValue, '{{resolve:ssm:UniShopEnvironmentId:1}}', !Ref  RefactorSpacesEnvironmentId]
-      ApplicationIdentifier: !If [ UseSSMApplicationIdValue, '{{resolve:ssm:UniShopApplicationId:1}}', !Ref  RefactorSpacesApplicationId]
+      EnvironmentIdentifier: !If [ UseSSMEnvironmentIdValue, '{{resolve:ssm:imageshopEnvironmentId:1}}', !Ref  RefactorSpacesEnvironmentId]
+      ApplicationIdentifier: !If [ UseSSMApplicationIdValue, '{{resolve:ssm:imageshopApplicationId:1}}', !Ref  RefactorSpacesApplicationId]
       ServiceIdentifier: !GetAtt GetCartService.ServiceIdentifier
       UriPathRoute:
-        SourcePath: /unicorns/basket
+        SourcePath: /images/basket
         IncludeChildPaths: true
         ActivationState: ACTIVE
         Methods:
@@ -100,7 +100,7 @@ Resources:
     Type: AWS::ApiGateway::Model
     DependsOn: GetCartServiceRoute
     Properties:
-      RestApiId: !If [ UseSSMApiGatewayIdValue, '{{resolve:ssm:UniShopApiGatewayId:1}}', !Ref  RefactorSpacesApiGatewayId]
+      RestApiId: !If [ UseSSMApiGatewayIdValue, '{{resolve:ssm:imageshopApiGatewayId:1}}', !Ref  RefactorSpacesApiGatewayId]
       ContentType: application/json
       Description: Schema for UniCo Basket
       Name: UnicornBasket
@@ -120,8 +120,8 @@ Resources:
     DependsOn: GetCartServiceRoute
     Properties:
       ServiceToken: !GetAtt IntegrationUpdaterFunction.Arn
-      ApiGatewayId: !If [ UseSSMApiGatewayIdValue, '{{resolve:ssm:UniShopApiGatewayId:1}}', !Ref  RefactorSpacesApiGatewayId]
-      ResourcePath: /unicorns/basket/{proxy+}
+      ApiGatewayId: !If [ UseSSMApiGatewayIdValue, '{{resolve:ssm:imageshopApiGatewayId:1}}', !Ref  RefactorSpacesApiGatewayId]
+      ResourcePath: /images/basket/{proxy+}
       CORS: true
       Method: GET
       Responses:
@@ -135,8 +135,8 @@ Resources:
     Version: "1.0"
     Properties:
       ServiceToken: !GetAtt IntegrationUpdaterFunction.Arn
-      ApiGatewayId: !If [ UseSSMApiGatewayIdValue, '{{resolve:ssm:UniShopApiGatewayId:1}}', !Ref  RefactorSpacesApiGatewayId]
-      ResourcePath: /unicorns/basket
+      ApiGatewayId: !If [ UseSSMApiGatewayIdValue, '{{resolve:ssm:imageshopApiGatewayId:1}}', !Ref  RefactorSpacesApiGatewayId]
+      ResourcePath: /images/basket
       CORS: true
       Method: POST
       Responses:
@@ -148,8 +148,8 @@ Resources:
     Version: "1.0"
     Properties:
       ServiceToken: !GetAtt IntegrationUpdaterFunction.Arn
-      ApiGatewayId: !If [ UseSSMApiGatewayIdValue, '{{resolve:ssm:UniShopApiGatewayId:1}}', !Ref  RefactorSpacesApiGatewayId]
-      ResourcePath: /unicorns/basket
+      ApiGatewayId: !If [ UseSSMApiGatewayIdValue, '{{resolve:ssm:imageshopApiGatewayId:1}}', !Ref  RefactorSpacesApiGatewayId]
+      ResourcePath: /images/basket
       CORS: true
       Method: DELETE
       Responses:
@@ -161,8 +161,8 @@ Resources:
     Version: "1.0"
     Properties:
       ServiceToken: !GetAtt IntegrationUpdaterFunction.Arn
-      ApiGatewayId: !If [ UseSSMApiGatewayIdValue, '{{resolve:ssm:UniShopApiGatewayId:1}}', !Ref  RefactorSpacesApiGatewayId]
-      ResourcePath: /unicorns/basket
+      ApiGatewayId: !If [ UseSSMApiGatewayIdValue, '{{resolve:ssm:imageshopApiGatewayId:1}}', !Ref  RefactorSpacesApiGatewayId]
+      ResourcePath: /images/basket
       Mock: true
       CORS: true
       Method: OPTIONS
@@ -179,8 +179,8 @@ Resources:
     Version: "1.0"
     Properties:
       ServiceToken: !GetAtt IntegrationUpdaterFunction.Arn
-      ApiGatewayId: !If [ UseSSMApiGatewayIdValue, '{{resolve:ssm:UniShopApiGatewayId:1}}', !Ref  RefactorSpacesApiGatewayId]
-      ResourcePath: /unicorns/basket
+      ApiGatewayId: !If [ UseSSMApiGatewayIdValue, '{{resolve:ssm:imageshopApiGatewayId:1}}', !Ref  RefactorSpacesApiGatewayId]
+      ResourcePath: /images/basket
       Delete: true
       Method: GET
 
@@ -195,7 +195,7 @@ Resources:
     Version: "1.0"
     Properties:
       ServiceToken: !GetAtt IntegrationUpdaterFunction.Arn
-      ApiGatewayId: !If [ UseSSMApiGatewayIdValue, '{{resolve:ssm:UniShopApiGatewayId:1}}', !Ref  RefactorSpacesApiGatewayId]
+      ApiGatewayId: !If [ UseSSMApiGatewayIdValue, '{{resolve:ssm:imageshopApiGatewayId:1}}', !Ref  RefactorSpacesApiGatewayId]
       Deploy: prod
 
   LambdaRole:
@@ -223,12 +223,12 @@ Resources:
                 Action: 'apigateway:*'
                 Resource: !Sub
                   - 'arn:aws:apigateway:${AWS::Region}::/restapis/${ApiId}'
-                  - ApiId: !If [ UseSSMApiGatewayIdValue, '{{resolve:ssm:UniShopApiGatewayId:1}}', !Ref  RefactorSpacesApiGatewayId]
+                  - ApiId: !If [ UseSSMApiGatewayIdValue, '{{resolve:ssm:imageshopApiGatewayId:1}}', !Ref  RefactorSpacesApiGatewayId]
               - Effect: Allow
                 Action: 'apigateway:*'
                 Resource: !Sub
                   - 'arn:aws:apigateway:${AWS::Region}::/restapis/${ApiId}/*'
-                  - ApiId: !If [ UseSSMApiGatewayIdValue, '{{resolve:ssm:UniShopApiGatewayId:1}}', !Ref  RefactorSpacesApiGatewayId]
+                  - ApiId: !If [ UseSSMApiGatewayIdValue, '{{resolve:ssm:imageshopApiGatewayId:1}}', !Ref  RefactorSpacesApiGatewayId]
 
   IntegrationUpdaterFunction:
     Type: AWS::Lambda::Function

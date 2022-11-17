@@ -49,9 +49,9 @@ public class UnicornRepositoryImpl implements UnicornRepository {
 
 	}
 	
-	public List<Unicorn> getUnicorns(){
+	public List<Unicorn> getimages(){
 		try {
-			return unicornMapper.getUnicorns();
+			return unicornMapper.getimages();
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;

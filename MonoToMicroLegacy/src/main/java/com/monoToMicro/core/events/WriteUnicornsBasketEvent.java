@@ -23,7 +23,7 @@ package com.monoToMicro.core.events;
  * @author nirozeri
  * 
  */
-public class WriteUnicornsBasketEvent extends ReadEvent {
+public class WriteimagesBasketEvent extends ReadEvent {
 	
 	private String userUuid = null;
 	private String unicornUuid = null;
@@ -32,7 +32,7 @@ public class WriteUnicornsBasketEvent extends ReadEvent {
 	 * 
 	 * @param userUuid
 	 */
-	public WriteUnicornsBasketEvent(String userUuid) {
+	public WriteimagesBasketEvent(String userUuid) {
 		this.setUserUuid(userUuid);
 		
 	}
@@ -42,7 +42,7 @@ public class WriteUnicornsBasketEvent extends ReadEvent {
 	 * @param userUuid
 	 * @param unicornUuid
 	 */
-	public WriteUnicornsBasketEvent(String userUuid, String unicornUuid) {
+	public WriteimagesBasketEvent(String userUuid, String unicornUuid) {
 		this.setUserUuid(userUuid);
 		this.setUnicornUuid(unicornUuid);
 	}

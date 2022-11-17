@@ -254,7 +254,7 @@ Resources:
             0-clone-repo:
               command: >-
                 git clone
-                https://github.com/aws-samples/unishop-monolith-to-microservices.git
+                https://github.com/aws-samples/imageshop-monolith-to-microservices.git
                 /home/ec2-user/MonoToMicro
             1-create-tables:
               command: !Join 
@@ -523,7 +523,7 @@ Resources:
   PublicDnsNameSSMParam:
     Type: AWS::SSM::Parameter
     Properties:
-      Name: UniShopPublicDnsName
+      Name: imageshopPublicDnsName
       Value: !Join 
         - /
         - - 'http:/'
@@ -536,7 +536,7 @@ Resources:
   VpcIdSSMParam:
     Type: AWS::SSM::Parameter
     Properties:
-      Name: UniShopVpcId
+      Name: imageshopVpcId
       Value: !Ref MonoToMicroVPC
       Type: String
       Description: Monolith VPC ID
@@ -563,9 +563,9 @@ Outputs:
     Description: S3 Bucket containing the compiled Lambda function
   UIBucket:
     Value: !Ref UIBucket
-    Description: S3 Bucket containing the UniShop website
+    Description: S3 Bucket containing the imageshop website
   WebsiteURL:
     Value: !GetAtt 
       - UIBucket
       - WebsiteURL
-    Description: URL for UniShop website hosted on S3
+    Description: URL for imageshop website hosted on S3

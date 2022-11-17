@@ -23,7 +23,7 @@ package com.monoToMicro.core.events;
  * @author nirozeri
  * 
  */
-public class UnicornsWriteBasketEvent extends UpdateEvent {
+public class imagesWriteBasketEvent extends UpdateEvent {
 	
 	
 	/**
@@ -31,7 +31,7 @@ public class UnicornsWriteBasketEvent extends UpdateEvent {
 	 * @param userUUID
 	 * @param unicornUUID
 	 */
-	public UnicornsWriteBasketEvent(State state) {
+	public imagesWriteBasketEvent(State state) {
 		this.state = state;
 	}
 }

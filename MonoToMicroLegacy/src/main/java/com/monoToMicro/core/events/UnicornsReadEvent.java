@@ -27,15 +27,15 @@ import com.monoToMicro.core.model.Unicorn;
  * @author nirozeri
  * 
  */
-public class UnicornsReadEvent extends ReadCompleteEvent {
+public class imagesReadEvent extends ReadCompleteEvent {
 
-	private List<Unicorn> unicorns = null;
+	private List<Unicorn> images = null;
 
 	/**
 	 * 
 	 * @param state
 	 */
-	public UnicornsReadEvent(State state) {
+	public imagesReadEvent(State state) {
 		this.setState(state);
 	}
 
@@ -44,24 +44,24 @@ public class UnicornsReadEvent extends ReadCompleteEvent {
 	 * @param items
 	 * @param state
 	 */
-	public UnicornsReadEvent(List<Unicorn> unicorns, State state) {
+	public imagesReadEvent(List<Unicorn> images, State state) {
 		this.setState(state);
-		this.unicorns = unicorns;
+		this.images = images;
 	}
 
 	/**
 	 * 
 	 * @param items
 	 */
-	public UnicornsReadEvent(List<Unicorn> unicorns) {
-		this.unicorns = unicorns;
+	public imagesReadEvent(List<Unicorn> images) {
+		this.images = images;
 	}
 
 	/**
 	 * 
 	 * @return
 	 */
-	public List<Unicorn> getUnicorns() {
-		return unicorns;
+	public List<Unicorn> getimages() {
+		return images;
 	}
 }

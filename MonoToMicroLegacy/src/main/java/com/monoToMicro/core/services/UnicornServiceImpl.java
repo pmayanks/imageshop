@@ -18,12 +18,12 @@
 
 package com.monoToMicro.core.services;
 
-import com.monoToMicro.core.events.ReadUnicornsBasketEvent;
-import com.monoToMicro.core.events.ReadUnicornsEvent;
-import com.monoToMicro.core.events.UnicornsReadBasketEvent;
-import com.monoToMicro.core.events.UnicornsReadEvent;
-import com.monoToMicro.core.events.UnicornsWriteBasketEvent;
-import com.monoToMicro.core.events.WriteUnicornsBasketEvent;
+import com.monoToMicro.core.events.ReadimagesBasketEvent;
+import com.monoToMicro.core.events.ReadimagesEvent;
+import com.monoToMicro.core.events.imagesReadBasketEvent;
+import com.monoToMicro.core.events.imagesReadEvent;
+import com.monoToMicro.core.events.imagesWriteBasketEvent;
+import com.monoToMicro.core.events.WriteimagesBasketEvent;
 import com.monoToMicro.core.model.Unicorn;
 import com.monoToMicro.core.model.UnicornBasket;
 import com.monoToMicro.core.repository.UnicornRepository;
@@ -37,7 +37,7 @@ import org.springframework.stereotype.Service;
  * 
  */
 @Service
-public class UnicornServiceImpl implements UnicornService {
+public class imageserviceImpl implements imageservice {
 
 	private final UnicornRepository unicornRepository;
 
@@ -45,69 +45,69 @@ public class UnicornServiceImpl implements UnicornService {
 	 * 
 	 * @param itemRepository
 	 */
-	public UnicornServiceImpl(final UnicornRepository uncironRepository) {
+	public imageserviceImpl(final UnicornRepository uncironRepository) {
 		this.unicornRepository = uncironRepository;
 	}
 	
-	public UnicornsReadEvent getUnicorns(ReadUnicornsEvent readUnicornsEvent) {
+	public imagesReadEvent getimages(ReadimagesEvent readimagesEvent) {
 		
-		List<Unicorn> unicorns = unicornRepository.getUnicorns();
+		List<Unicorn> images = unicornRepository.getimages();
 			
-		if (unicorns != null) {
-			UnicornsReadEvent unicornsEvent = new UnicornsReadEvent(unicorns,
-			UnicornsReadEvent.State.SUCCESS);
-			return unicornsEvent;
+		if (images != null) {
+			imagesReadEvent imagesEvent = new imagesReadEvent(images,
+			imagesReadEvent.State.SUCCESS);
+			return imagesEvent;
 		}
-		return new UnicornsReadEvent(UnicornsReadEvent.State.FAILED);		
+		return new imagesReadEvent(imagesReadEvent.State.FAILED);		
 	}
 
 	@Override
-	public UnicornsWriteBasketEvent addUnicornToBasket(WriteUnicornsBasketEvent writeUnicornsBasketEvent) {
+	public imagesWriteBasketEvent addUnicornToBasket(WriteimagesBasketEvent writeimagesBasketEvent) {
 		
-		String userUuid = writeUnicornsBasketEvent.getUserUuid();
-		String unicornUuid = writeUnicornsBasketEvent.getUnicornUuid();
+		String userUuid = writeimagesBasketEvent.getUserUuid();
+		String unicornUuid = writeimagesBasketEvent.getUnicornUuid();
 		boolean result = unicornRepository.addUnicornToBasket(userUuid, unicornUuid);
 		
 		if (result) {			
-			return new UnicornsWriteBasketEvent(UnicornsReadEvent.State.SUCCESS);
+			return new imagesWriteBasketEvent(imagesReadEvent.State.SUCCESS);
 		}
-		return new UnicornsWriteBasketEvent(UnicornsReadEvent.State.FAILED);
+		return new imagesWriteBasketEvent(imagesReadEvent.State.FAILED);
 	}
 
 	@Override
-	public UnicornsWriteBasketEvent removeUnicornFromBasket(WriteUnicornsBasketEvent writeUnicornsBasketEvent) {
-		String userUuid = writeUnicornsBasketEvent.getUserUuid();
-		String unicornUuid = writeUnicornsBasketEvent.getUnicornUuid();
+	public imagesWriteBasketEvent removeUnicornFromBasket(WriteimagesBasketEvent writeimagesBasketEvent) {
+		String userUuid = writeimagesBasketEvent.getUserUuid();
+		String unicornUuid = writeimagesBasketEvent.getUnicornUuid();
 		boolean result = unicornRepository.removeUnicornFromBasket(userUuid, unicornUuid);
 		
 		if (result) {			
-			return new UnicornsWriteBasketEvent(UnicornsReadEvent.State.SUCCESS);
+			return new imagesWriteBasketEvent(imagesReadEvent.State.SUCCESS);
 		}
-		return new UnicornsWriteBasketEvent(UnicornsReadEvent.State.FAILED);
+		return new imagesWriteBasketEvent(imagesReadEvent.State.FAILED);
 	}
 
 	@Override
-	public UnicornsReadBasketEvent getUnicornBasket(ReadUnicornsBasketEvent readUnicornsBasketEvent) {
-		String userUUID = readUnicornsBasketEvent.getUserUUID();
+	public imagesReadBasketEvent getUnicornBasket(ReadimagesBasketEvent readimagesBasketEvent) {
+		String userUUID = readimagesBasketEvent.getUserUUID();
 		
-		List<Unicorn> unicorns = unicornRepository.getUnicornBasket(userUUID);
+		List<Unicorn> images = unicornRepository.getUnicornBasket(userUUID);
 		
-		if (unicorns != null) {			
-			return new UnicornsReadBasketEvent(unicorns, UnicornsReadEvent.State.SUCCESS);
+		if (images != null) {			
+			return new imagesReadBasketEvent(images, imagesReadEvent.State.SUCCESS);
 		}
-		return new UnicornsReadBasketEvent(UnicornsReadEvent.State.FAILED);		
+		return new imagesReadBasketEvent(imagesReadEvent.State.FAILED);		
 	}
 
 	@Override
-	public UnicornsReadBasketEvent getAllBaskets() {
+	public imagesReadBasketEvent getAllBaskets() {
 		
 		List<UnicornBasket> baskets = unicornRepository.getAllBaskets();
 		
 		if (baskets != null) {			
-			UnicornsReadBasketEvent event = new UnicornsReadBasketEvent(UnicornsReadEvent.State.SUCCESS);
+			imagesReadBasketEvent event = new imagesReadBasketEvent(imagesReadEvent.State.SUCCESS);
 			event.setBaskets(baskets);
 			return event;
 		}
-		return new UnicornsReadBasketEvent(UnicornsReadEvent.State.FAILED);
+		return new imagesReadBasketEvent(imagesReadEvent.State.FAILED);
 	}		
 }

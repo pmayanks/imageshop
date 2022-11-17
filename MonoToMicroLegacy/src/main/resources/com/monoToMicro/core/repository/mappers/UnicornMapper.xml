@@ -4,15 +4,15 @@
 
 <mapper namespace="com.monoToMicro.core.repository.mappers.UnicornMapper">
 
-	<select id="getUnicorns" resultType="com.monoToMicro.core.model.Unicorn">
+	<select id="getimages" resultType="com.monoToMicro.core.model.Unicorn">
 		SELECT 
 			*
 		FROM 
-			unicorns		
+			images		
 	</select>
 	
 	<insert id="addUnicornToBasket" parameterType="map" useGeneratedKeys="true">
-		INSERT IGNORE INTO unicorns_basket 
+		INSERT IGNORE INTO images_basket 
 				(
 					uuid,
 					unicornUuid 						  		
@@ -26,7 +26,7 @@
 	
 	<delete id="removeUnicornFromBasket" parameterType="map">
 			
-		DELETE  FROM unicorns_basket
+		DELETE  FROM images_basket
 		WHERE
 			 uuid = #{userUuid}
 		AND
@@ -40,8 +40,8 @@
     		u.description,
     		u.price,
     		u.image
-		FROM unishop.unicorns u
-		JOIN unishop.unicorns_basket ub ON u.uuid = ub.unicornUuid
+		FROM imageshop.images u
+		JOIN imageshop.images_basket ub ON u.uuid = ub.unicornUuid
 		WHERE 
 			ub.uuid = #{userUuid}		
 	</select>
@@ -54,13 +54,13 @@
 			unicorn.description as unicornDescription,
 			unicorn.price as unicornPrice,
 			unicorn.image as unicornImage
-		FROM unishop.unicorns_basket basket
-		JOIN unishop.unicorns unicorn on basket.unicornUuid = unicorn.uuid		
+		FROM imageshop.images_basket basket
+		JOIN imageshop.images unicorn on basket.unicornUuid = unicorn.uuid		
 	</select>
 	
 	<resultMap id="unicornBasket" type="com.monoToMicro.core.model.UnicornBasket">
   		<result property="uuid" column="userUuid"/>  		  		
-		<collection property="unicorns" ofType="com.monoToMicro.core.model.Unicorn">
+		<collection property="images" ofType="com.monoToMicro.core.model.Unicorn">
 			<result property="uuid" column="unicornUuid"/>
 			<result property="name" column="unicornName"/>
 			<result property="description" column="unicornDescription"/>

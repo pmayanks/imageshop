@@ -35,7 +35,7 @@ import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 public class UnicornBasketImpl implements RequestHandler<UnicornBasket, String> {
-  private static final String UNICORN_TABLE_NAME = "unishop";
+  private static final String UNICORN_TABLE_NAME = "imageshop";
   private static final DynamoDbAsyncClient ddb = DynamoDbAsyncClient.builder()
     .credentialsProvider(EnvironmentVariableCredentialsProvider.create())
     .httpClientBuilder(AwsCrtAsyncHttpClient.builder().maxConcurrency(50))
@@ -72,7 +72,7 @@ public class UnicornBasketImpl implements RequestHandler<UnicornBasket, String> 
 
     //if there is no current basket then use the incoming basket as the new basket
     if (currentBasket == null) {
-      if (unicornBasket.getUuid() != null && unicornBasket.getUnicorns() != null) {
+      if (unicornBasket.getUuid() != null && unicornBasket.getimages() != null) {
         unicornBasketTable.putItem(unicornBasket);
         return "Added Unicorn to basket";
       }
@@ -80,15 +80,15 @@ public class UnicornBasketImpl implements RequestHandler<UnicornBasket, String> 
     }
 
     //basket already exist, will check if item exist and add if not found
-    List<Unicorn> currentUnicorns = currentBasket.getUnicorns();
-    List<Unicorn> unicornsToAdd = unicornBasket.getUnicorns();
+    List<Unicorn> currentimages = currentBasket.getimages();
+    List<Unicorn> imagesToAdd = unicornBasket.getimages();
 
     //Assuming only one will be added but checking for null or empty values
-    if (unicornsToAdd != null && !unicornsToAdd.isEmpty()) {
-      Unicorn unicornToAdd = unicornsToAdd.get(0);
+    if (imagesToAdd != null && !imagesToAdd.isEmpty()) {
+      Unicorn unicornToAdd = imagesToAdd.get(0);
       String unicornToAddUuid = unicornToAdd.getUuid();
 
-      for (Unicorn currentUnicorn : currentUnicorns) {
+      for (Unicorn currentUnicorn : currentimages) {
         if (currentUnicorn.getUuid().equals(unicornToAddUuid)) {
           //The unicorn already exists, no need to add him.
           return "Unicorn already exists!";
@@ -96,8 +96,8 @@ public class UnicornBasketImpl implements RequestHandler<UnicornBasket, String> 
       }
 
       //Unicorn was not found, need to add and save
-      currentUnicorns.add(unicornToAdd);
-      currentBasket.setUnicorns(currentUnicorns);
+      currentimages.add(unicornToAdd);
+      currentBasket.setimages(currentimages);
       unicornBasketTable.putItem(currentBasket);
       return "Added Unicorn to basket";
     }
@@ -119,31 +119,31 @@ public class UnicornBasketImpl implements RequestHandler<UnicornBasket, String> 
     }
 
     //basket exist, will check if item exist and will remove
-    List<Unicorn> currentUnicorns = currentBasket.getUnicorns();
-    List<Unicorn> unicornsToRemove = unicornBasket.getUnicorns();
+    List<Unicorn> currentimages = currentBasket.getimages();
+    List<Unicorn> imagesToRemove = unicornBasket.getimages();
 
     //Assuming only one will be removed but checking for null or empty values
-    if (unicornsToRemove != null && !unicornsToRemove.isEmpty()) {
-      Unicorn unicornToRemove = unicornsToRemove.get(0);
+    if (imagesToRemove != null && !imagesToRemove.isEmpty()) {
+      Unicorn unicornToRemove = imagesToRemove.get(0);
       String unicornToRemoveUuid = unicornToRemove.getUuid();
 
-      for (Unicorn currentUnicorn : currentUnicorns) {
+      for (Unicorn currentUnicorn : currentimages) {
         if (currentUnicorn.getUuid().equals(unicornToRemoveUuid)) {
-          currentUnicorns.remove(currentUnicorn);
-          if (currentUnicorns.isEmpty()) {
-            //no more unicorns in basket, will delete the basket
+          currentimages.remove(currentUnicorn);
+          if (currentimages.isEmpty()) {
+            //no more images in basket, will delete the basket
             unicornBasketTable.deleteItem(currentBasket);
             return "Unicorn was removed and basket was deleted!";
           } else {
-            //keeping basket alive as more unicorns are in it
-            currentBasket.setUnicorns(currentUnicorns);
+            //keeping basket alive as more images are in it
+            currentBasket.setimages(currentimages);
             unicornBasketTable.putItem(currentBasket);
-            return "Unicorn was removed! Other unicorns are still in basket";
+            return "Unicorn was removed! Other images are still in basket";
           }
         }
       }
 
-      if (currentBasket.getUnicorns() != null && currentBasket.getUnicorns().isEmpty()) {
+      if (currentBasket.getimages() != null && currentBasket.getimages().isEmpty()) {
         //no unicorn to remove, will try to remove the basket nonetheless
         unicornBasketTable.deleteItem(currentBasket);
       }
@@ -152,7 +152,7 @@ public class UnicornBasketImpl implements RequestHandler<UnicornBasket, String> 
     return "Are you sure you asked to remove a Unicorn?";
   }
 
-  public UnicornBasket getUnicornsBasket(UnicornBasket unicornBasket, Context context)
+  public UnicornBasket getimagesBasket(UnicornBasket unicornBasket, Context context)
     throws ExecutionException, InterruptedException {
     final DynamoDbAsyncTable<UnicornBasket> unicornBasketTable = client.table(
       UNICORN_TABLE_NAME, TableSchema.fromBean(UnicornBasket.class));
